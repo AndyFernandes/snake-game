@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SNAKE!</title>
+</head>
+<body>
+	<canvas id="stage" width="600" height="600"></canvas>
+
+	<script type="text/javascript">
+		// TODO: Melhorar layout do jogo
+		// TODO: Incorporar score | botão de pausar
+		
+		window.onload = function(){
+			var stage = document.getElementById('stage');
+			// contexto
+			var ctx = stage.getContext("2d");
+			//quando a tecla por pressionada chama a função keyPush
+			document.addEventListener("keydown", keyPush);
+			setInterval(game, 60);
+			// velocidade
+			const vel = 1;
+			// trajeto da cobrinha;
+			var trail = [];
+			// tamanho da cobra
+			tail = 5;
+			// o tamanho de cada pecinha- quadradinho - é 20px
+			var lp = 30;
+			var qp = 20;
+			var vx = vy = 0;
+			// posição da cabeça
+			var px = 10, py = 15;
+			// posicao da maçã - inicialmente 15,15
+			var ax = ay = 15;
+			
+			// chama a função game - onde vai estar toda a lógica do jogo que será atualizada no intervalo de tempo abaio
+			function game(){
+				px += vx;
+				py += vy;
+
+				// se a cobra chega na borda esquerda -> ela é redirecionada pra borda direita
+				// os 4 ifs abaixo se referem a essa troca de posição da cobrinha
+				// esquerda -> direita
+				if (px < 0){
+					px = qp - 1;
+				}
+				// direita -> esquerda
+				if(px > qp - 1){
+					px = 0;
+				}
+				// cima -> baixo
+				if(py < 0){
+					py = qp - 1;
+				}
+				// baixo -> cima
+				if(py > qp - 1){
+					py = 0;
+				}
+
+				// pintando o stage
+				ctx.fillStyle = "gray";
+				ctx.fillRect(0, 0, stage.width, stage.height);
+
+				// pintando a maçã
+				ctx.fillStyle = "red";
+				ctx.fillRect(ax*lp, ay*lp, lp, lp);
+
+				// pintando a cobra
+
+				ctx.fillStyle = "green";
+				// verificações
+				for(var i = 0; i < trail.length; i++){
+					// pintando o rastro na posicao i
+					ctx.fillRect(trail[i].x*lp, trail[i].y*lp, lp-1, lp-1);
+					
+					// se a posicao da cabeça bater no corpo/rastro da cobra
+					if (trail[i].x == px && trail[i].y == py){
+						vx = vy = 0;
+						tail = 5;
+						// TODO: fazer tratamento para aparecer imagem de GAMEOVER
+					}
+				}
+
+				// adicionando ao rastro a nova posição adquirida pela cobrinha e dando um shift nas posições do rastro da cobrinha
+				trail.push({x:px, y:py});
+				while (trail.length > tail){
+					trail.shift(); // tira o 1o elemento do array
+				}
+
+				// isso simboliza que a cobrinha comeu a maçã = +1 quadrinho
+				if (ax == px && ay == py){
+					tail++;
+					ax = Math.floor(Math.random()*qp);
+					ay = Math.floor(Math.random()*qp);
+				}
+			}
+
+			// movimentação do jogo
+			function keyPush(event){
+				switch (event.keyCode){
+					case 37: // Left
+						vx = -vel;
+						vy = 0;
+						break;
+					case 38: // Up
+						vx = 0;
+						vy = -vel;
+						break;
+					case 39: // Right
+						vx = vel;
+						vy = 0;
+						break;
+					case 40: // Down
+						vx = 0;
+						vy = vel;
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
