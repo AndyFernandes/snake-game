@@ -12,12 +12,12 @@
 	<script type="text/javascript">
 		// TODO: Melhorar layout do jogo
 		// TODO: Incorporar score | botão de pausar
-				
+		
 		window.onload = function(){
 			var stage = document.getElementById('stage');
 			//capturar o quadro de pontuação
 			let pontos = document.getElementById('pontos')
-      		// let pontoi = 0
+      		let pontoi = 0
 			// contexto
 			var ctx = stage.getContext("2d");
 			//quando a tecla por pressionada chama a função keyPush
@@ -82,7 +82,9 @@
 					if (trail[i].x == px && trail[i].y == py){
 						vx = vy = 0;
 						tail = 5;
+						pontoi = 0
 						// TODO: fazer tratamento para aparecer imagem de GAMEOVER
+						
 					}
 				}
 
@@ -97,12 +99,17 @@
 					tail++;
 					ax = Math.floor(Math.random()*qp);
 					ay = Math.floor(Math.random()*qp);
+				// contabilizando os pontos
+					pontos.innerHTML = ++pontoi;
 				}
 			}
 
 			// movimentação do jogo
 			let lastKeyPressed = ""
 
+			// nesta função tratei a lógica do jogo snake, que a cobra não pode voltar para direita se estiver indo para esquerda e vice versa,
+			// mesma coisa para cima e para baixo, então eu adicionei uma condição na função KeyPush, que verifica a última tecla pressionada
+			// para aceitar a direção.
 			function keyPush(event){
 				switch (event.keyCode){
 					case 37: // Left
