@@ -5,13 +5,19 @@
 </head>
 <body>
 	<canvas id="stage" width="600" height="600"></canvas>
+	<div class="pontuacao">
+        Pontuação: <span id="pontos">0</span>
+    </div>
 
 	<script type="text/javascript">
 		// TODO: Melhorar layout do jogo
 		// TODO: Incorporar score | botão de pausar
-		
+				
 		window.onload = function(){
 			var stage = document.getElementById('stage');
+			//capturar o quadro de pontuação
+			let pontos = document.getElementById('pontos')
+      		// let pontoi = 0
 			// contexto
 			var ctx = stage.getContext("2d");
 			//quando a tecla por pressionada chama a função keyPush
@@ -95,23 +101,37 @@
 			}
 
 			// movimentação do jogo
+			let lastKeyPressed = ""
+
 			function keyPush(event){
 				switch (event.keyCode){
 					case 37: // Left
+						if(lastKeyPressed != "right"){
 						vx = -vel;
 						vy = 0;
+						lastKeyPressed = "left"
+						}
 						break;
 					case 38: // Up
+						if(lastKeyPressed != "down"){
 						vx = 0;
 						vy = -vel;
+						lastKeyPressed = "up"
+						}
 						break;
 					case 39: // Right
+						if(lastKeyPressed != "left"){
 						vx = vel;
 						vy = 0;
+						lastKeyPressed = "right"
+						}
 						break;
 					case 40: // Down
+						if(lastKeyPressed != "up"){
 						vx = 0;
 						vy = vel;
+						lastKeyPressed = "down"
+						}
 						break;
 					default:
 						break;
