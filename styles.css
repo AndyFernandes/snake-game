@@ -15,5 +15,8 @@ body{
 
 }
 #title{
+    font-size: 22px;
+}
+.scoreDisplay{
     font-size: 18px;
 }
