@@ -2,14 +2,23 @@
 <html>
 <head>
 	<title>SNAKE!</title>
+	<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+	<section id="score">
+		<p id="title">PONTUAÇÃO
+			<div class="scoreDisplay"></div>
+		</p>
+	</section>
 	<canvas id="stage" width="600" height="600"></canvas>
 
 	<script type="text/javascript">
 		// TODO: Melhorar layout do jogo
 		// TODO: Incorporar score | botão de pausar
 		
+		let scoreDisplay = document.querySelector(".scoreDisplay");
+		let score = 0;
+
 		window.onload = function(){
 			var stage = document.getElementById('stage');
 			// contexto
@@ -18,7 +27,7 @@
 			document.addEventListener("keydown", keyPush);
 			setInterval(game, 60);
 			// velocidade
-			const vel = 0.9;  // TODO: mudar a velocidade
+			const vel = 1;  // TODO: mudar a velocidade
 			// trajeto da cobrinha;
 			var trail = [];
 			// tamanho da cobra
@@ -36,6 +45,8 @@
 			function game(){
 				px += vx;
 				py += vy;
+
+				scoreDisplay.innerHTML = score;
 
 				// se a cobra chega na borda esquerda -> ela é redirecionada pra borda direita
 				// os 4 ifs abaixo se referem a essa troca de posição da cobrinha
@@ -91,6 +102,8 @@
 					tail++;
 					ax = Math.floor(Math.random()*qp);
 					ay = Math.floor(Math.random()*qp);
+					score++;
+					scoreDisplay.textContent = score;
 				}
 			}
 
