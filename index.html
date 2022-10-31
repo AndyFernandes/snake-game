@@ -18,6 +18,8 @@
 		
 		let scoreDisplay = document.querySelector(".scoreDisplay");
 		let score = 0;
+		let playAgain = document.querySelector(".playAgain");
+		let fimDeJogo = "Fim de Jogo!"
 
 		window.onload = function(){
 			var stage = document.getElementById('stage');
@@ -87,6 +89,8 @@
 					if (trail[i].x == px && trail[i].y == py){
 						vx = vy = 0;
 						tail = 5;
+						score = 0
+						scoreDisplay.textContent = fimDeJogo;
 						// TODO: fazer tratamento para aparecer imagem de GAMEOVER
 					}
 				}
