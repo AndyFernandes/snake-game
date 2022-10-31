@@ -19,6 +19,7 @@
 		let scoreDisplay = document.querySelector(".scoreDisplay");
 		let score = 0;
 		let fimDeJogo = "FIM DE JOGO!!!!"
+		let posicaoInicial =  Math.floor(Math.random() * (19 - 0 + 1)) + 0;
 
 		window.onload = function(){
 			var stage = document.getElementById('stage');
@@ -39,8 +40,8 @@
 			var vx = vy = 0;
 			// posição da cabeça
 			var px = 10, py = 15;
-			// posicao da maçã - inicialmente 15,15
-			var ax = ay = 15;
+			// posicao da maçã - alterada para iniciar de forma aleatória
+			var ax = ay = posicaoInicial;
 			
 			// chama a função game - onde vai estar toda a lógica do jogo que será atualizada no intervalo de tempo abaio
 			function game(){
