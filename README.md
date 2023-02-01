@@ -1,3 +1,9 @@
-# snake-game
-Repository dedicated to the classic Snake Game. :snake::apple::sparkles: The purpose is to train the knowledge of the JavaScript language. :stuck_out_tongue_winking_eye: :ok_hand:
-
+Repositorio para aprendizado em Git com o Snake Game, em html!
+- git clone
+- git brach
+- git checkout
+- git merge
+- git status
+- git add
+- git commit -m "message"
+- git push
